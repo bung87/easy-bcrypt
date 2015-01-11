@@ -87,3 +87,8 @@ proc `==`*(a, b: PasswordSalt): bool =
                               int8(array[BCRYPT_HASHSIZE, char](b)[i]))
 
   return resultNum == 0
+
+proc `$`*(self: PasswordSalt): string =
+  result = ""
+  for v in array[BCRYPT_HASHSIZE, char](self):
+    result.add(v)
