@@ -93,6 +93,8 @@ proc `==`*(a, b: PasswordSalt): bool =
   return resultNum == 0
 
 proc `$`*(self: PasswordSalt): string =
+  let self = array[BCRYPT_HASHSIZE, char](self)
   result = ""
-  for v in array[BCRYPT_HASHSIZE, char](self):
-    result.add(v)
+  for i in 0 .. BCRYPT_HASHSIZE:
+    if self[i] == '\0': break
+    result.add(self[i])
