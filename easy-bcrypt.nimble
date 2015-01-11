@@ -11,6 +11,6 @@ license = "CC0"
 
 InstallFiles = """
 COPYING
-bcrypt.nim
+easy_bcrypt.nim
 """
 InstallDirs = "lib"
