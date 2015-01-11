@@ -14,3 +14,9 @@ Storing a password in a database:
 
     let passwordString = $passwordHash
     dbconn.exec("...", passwordString)
+
+Loading a password from a database:
+
+    let password = dbconn.exec(
+      "SELECT password FROM users WHERE username = ?;", username)
+    let passwordSalt = loadPasswordSalt(password)

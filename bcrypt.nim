@@ -12,28 +12,28 @@ import pegs
 #  with this software. If not, see
 #  <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-
-##  Brief Example
-##  -------------
+## Brief Example
+## -------------
 ##
-##  Hashing a password:
+## Hashing a password:
 ##
-##      hashPw(password, genSalt(12))
+##     let passwordHash = hashPw(password, genSalt(12))
 ##
-##  Verifying a password:
+## Verifying a password:
 ##
-##      let savedHash = ...
-##      if hashPw(password, savedHash) != savedHash:
-##        echo "Password doesn't match"
-##      else:
-##        echo "Password matches!"
+##     let savedHash = ...
+##     assert hashPw(password, savedHash) == savedHash
 ##
+## Storing a password in a database:
 ##
-##  IMPORTANT NOTE: using strcmp or memcmp like in this simple example may make
-##  your code vulnerable to timing attacks[1]. If possible, use a function that
-##  always compares all the characters in the string before returning.
+##     let passwordString = $passwordHash
+##     dbconn.exec("...", passwordString)
 ##
-##  [1] https://en.wikipedia.org/wiki/Timing_attack
+## Loading a password from a database:
+##
+##     let password = dbconn.exec(
+##       "SELECT password FROM users WHERE username = ?;", username)
+##     let passwordSalt = loadPasswordSalt(password)
 
 const
   BCRYPT_HASHSIZE = 64
