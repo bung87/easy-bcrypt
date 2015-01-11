@@ -69,12 +69,21 @@ proc bcrypt_hashpw(passwd: cstring; salt: array[BCRYPT_HASHSIZE, char];
 
 
 type
-  PasswordSalt* = array[BCRYPT_HASHSIZE, char]
+  PasswordSalt* = distinct array[BCRYPT_HASHSIZE, char]
 
 proc genSalt*(workfactor: 4..32 = 10): PasswordSalt =
-  if bcrypt_gensalt(cint workfactor, result) != 0:
+  if bcrypt_gensalt(cint workfactor, array[BCRYPT_HASHSIZE, char](result)) != 0:
     raise newException(Exception, "bcrypt salt generation failed")
 
 proc hashPw*(password: cstring, salt: PasswordSalt): PasswordSalt =
-  if bcrypt_hashpw(password, salt, result) != 0:
+  if bcrypt_hashpw(password, array[BCRYPT_HASHSIZE, char](salt),
+                   array[BCRYPT_HASHSIZE, char](result)) != 0:
     raise newException(Exception, "bcrypt password hashing failed")
+
+proc `==`*(a, b: PasswordSalt): bool =
+  var resultNum = 0
+  for i in 0 .. <BCRYPT_HASHSIZE:
+    resultNum = resultNum or (int8(array[BCRYPT_HASHSIZE, char](a)[i]) xor
+                              int8(array[BCRYPT_HASHSIZE, char](b)[i]))
+
+  return resultNum == 0
