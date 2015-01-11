@@ -1,6 +1,6 @@
 [Package]
 name = "easy-bcrypt"
-version = "1.0.0"
+version = "1.0.1"
 author = "Ricardo Garcia"
 description = """
 This library is a simple wrapper providing a convenient reentrant interface for
