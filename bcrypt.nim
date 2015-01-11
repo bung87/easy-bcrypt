@@ -37,11 +37,11 @@
 const
   BCRYPT_HASHSIZE = 64
 
-{.compile: "/lib/bcrypt.c"}
-{.compile: "/lib/crypt_blowfish/crypt_blowfish.c"}
-{.compile: "/lib/crypt_blowfish/x86.S"}
-{.compile: "/lib/crypt_blowfish/crypt_gensalt.c"}
-{.compile: "/lib/crypt_blowfish/wrapper.c"}
+{.compile: "lib/bcrypt.c"}
+{.compile: "lib/crypt_blowfish/crypt_blowfish.c"}
+{.compile: "lib/crypt_blowfish/x86.S"}
+{.compile: "lib/crypt_blowfish/crypt_gensalt.c"}
+{.compile: "lib/crypt_blowfish/wrapper.c"}
 
 {.push importc, cdecl.}
 

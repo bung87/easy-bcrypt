@@ -13,3 +13,4 @@ InstallFiles = """
 COPYING
 bcrypt.nim
 """
+InstallDirs = "lib"
