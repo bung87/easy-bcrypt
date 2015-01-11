@@ -1,4 +1,3 @@
-import pegs
 #
 #  bcrypt wrapper library
 #
@@ -82,27 +81,8 @@ proc hashPw*(password: cstring, salt: PasswordSalt): PasswordSalt =
     raise newException(Exception, "bcrypt password hashing failed")
 
 proc loadPasswordSalt*(val: string): PasswordSalt =
-  var isValid = val.len > 7 and
-                val[0] == '$' and
-                val[1] == '2' and
-                val[2] in {'a', 'y'} and
-                val[3] == '$' and
-                val[4] in {'0'..'9'} and  # max value is 32
-                val[5] in {'0'..'9'} and
-                val[6] == '$'
-  if isValid:
-    for i in 7 .. <val.len:
-      if val[i] notin {'a'..'z', 'A'..'Z', '0'..'9', '/', '.'}:
-        isValid = false
-
-  if not isValid:
-    raise newException(Exception, "Invalid password hash `" & val & "`")
-  else:
-    var resVal: array[BCRYPT_HASHSIZE, char]
-    for i, v in val:
-      resVal[i] = v
-    return PasswordSalt(resVal)
-
+  for i, v in val:
+    array[BCRYPT_HASHSIZE, char](result)[i] = v
 
 proc `==`*(a, b: PasswordSalt): bool =
   var resultNum = 0
