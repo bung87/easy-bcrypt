@@ -86,7 +86,7 @@ proc loadPasswordSalt*(val: string): PasswordSalt =
 
 proc `==`*(a, b: PasswordSalt): bool =
   var resultNum = 0
-  for i in 0 .. <BCRYPT_HASHSIZE:
+  for i in 0 ..< BCRYPT_HASHSIZE:
     resultNum = resultNum or (int8(array[BCRYPT_HASHSIZE, char](a)[i]) xor
                               int8(array[BCRYPT_HASHSIZE, char](b)[i]))
 
