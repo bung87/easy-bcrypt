@@ -8,7 +8,7 @@ Hashing a password:
 Verifying a password:
 
     let savedHash = ...
-    assert hashPw(password, savedHash) == savedHash
+    $hashPw(password, loadPasswordSalt(savedHash)) == savedHash
 
 Storing a password in a database:
 
