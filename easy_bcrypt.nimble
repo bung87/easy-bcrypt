@@ -1,5 +1,5 @@
 [Package]
-name = "easy-bcrypt"
+name = "easybcrypt"
 version = "2.0.2"
 author = "Ricardo Garcia"
 description = """
