@@ -1,5 +1,4 @@
-[Package]
-name = "easybcrypt"
+
 version = "2.0.2"
 author = "Ricardo Garcia"
 description = """
@@ -9,8 +8,6 @@ Designer at http://www.openwall.com/crypt/.
 """
 license = "CC0"
 
-InstallFiles = """
-COPYING
-easy_bcrypt.nim
-"""
-InstallDirs = "lib"
+srcDir        = "src"
+
+installExt = @["nim", "c", "h", "S"]
